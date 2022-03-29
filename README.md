@@ -13,14 +13,14 @@
 
 ### Build information
 
-| Input Name       | Description                                                         | Default value |
-|------------------|---------------------------------------------------------------------|---------------|
-| `tag`            | Tag of the built image.                                             | **required**  |
-| `dockerfile`     | Dockerfile to build the image.                                      | Dockerfile    |
-| `dockerfile_path`| Path to a Dockerfile, relative to the fetched git repository root.  | **required**  |
-| `use_distgen`    | The action will use distgen for generating dockerfiles if true.     | false         |
-| `docker_context` | Docker build context.                                               | .             |
-
+| Input Name        | Description                                                        | Default value |
+|-------------------|--------------------------------------------------------------------|---------------|
+| `tag`             | Tag of the built image.                                            | **required**  |
+| `dockerfile`      | Dockerfile to build the image.                                     | Dockerfile    |
+| `dockerfile_path` | Path to a Dockerfile, relative to the fetched git repository root. | **required**  |
+| `use_distgen`     | The action will use distgen for generating dockerfiles if true.    | false         |
+| `docker_context`  | Docker build context.                                              | .             |
+| `suffix_name`     | suffix name if it is different from tag name                       |               |
 
 
 ## Example

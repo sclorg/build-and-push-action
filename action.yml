@@ -36,6 +36,10 @@ inputs:
     description: 'The action will use distgen for generating dockerfiles if true'
     required: false
     default: 'false'
+  suffix_name:
+    description: 'Suffix name used during the building'
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -98,6 +102,16 @@ runs:
         tmp="${{ inputs.dockerfile_path }}"
         echo "::set-output name=clean_dockerfile_path::${tmp//./}"
 
+    - name: Get proper suffix name
+      id: suffix_name
+      shell: bash
+      run: |
+        suffix="${{ inputs.tag }}"
+        if [ ${{ inputs.suffix }} != "" ]; then
+          suffix="${{ inputs.suffix }}"
+        fi
+        echo "::set-output name=suffix::$suffix"
+
     - name: Build image
       if: steps.check_exclude_file.outputs.files_exists == 'false'
       id: build-image
@@ -105,7 +119,7 @@ runs:
       uses: redhat-actions/buildah-build@v2
       with:
         dockerfiles: ${{ inputs.dockerfile_path }}/${{ inputs.dockerfile }}
-        image: ${{ steps.base-image-name.outputs.image_name}}-${{ steps.clean_path.outputs.clean_dockerfile_path }}-${{ inputs.tag }}
+        image: ${{ steps.base-image-name.outputs.image_name}}-${{ steps.clean_path.outputs.clean_dockerfile_path }}-${{ steps.suffix_name.outputs.suffix }}
         context: ${{ inputs.docker_context }}
         tags: latest ${{ inputs.tag }} ${{ steps.date_tag.outputs.tag }} ${{ github.sha }}
 
