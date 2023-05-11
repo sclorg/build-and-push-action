@@ -79,6 +79,11 @@ runs:
       with:
         files: "${{ inputs.dockerfile }}"
         allow_failure: true # fails the Action if Dockerfile is missing
+        
+    - name: Install qemu dependency for multi-arch
+        run: |
+          sudo yum update
+          sudo yum install -y qemu-user-static
 
     - name: Build image
       if: steps.check_exclude_file.outputs.files_exists == 'false'
@@ -88,21 +93,22 @@ runs:
       with:
         dockerfiles: ${{ inputs.dockerfile }}
         image: ${{ inputs.image_name}}
+        archs: amd64, s390x
         context: ${{ inputs.docker_context }}
         tags: latest ${{ inputs.tag }} ${{ steps.vars.outputs.cur_date }} ${{ github.sha }}
 
-    - name: Push image to Quay.io/${{ inputs.registry_namespace }} namespace
-      if: steps.check_exclude_file.outputs.files_exists == 'false'
-      id: push-to-registry
-      uses: redhat-actions/push-to-registry@v2.2
-      with:
-        image: ${{ steps.build-image.outputs.image }}
-        tags: ${{ steps.build-image.outputs.tags }}
-        registry: ${{ inputs.registry }}/${{ inputs.registry_namespace }}
-        username: ${{ inputs.registry_username }}
-        password: ${{ inputs.registry_token }}
+#    - name: Push image to Quay.io/${{ inputs.registry_namespace }} namespace
+#      if: steps.check_exclude_file.outputs.files_exists == 'false'
+#      id: push-to-registry
+#      uses: redhat-actions/push-to-registry@v2.2
+#      with:
+#        image: ${{ steps.build-image.outputs.image }}
+#        tags: ${{ steps.build-image.outputs.tags }}
+#        registry: ${{ inputs.registry }}/${{ inputs.registry_namespace }}
+#        username: ${{ inputs.registry_username }}
+#        password: ${{ inputs.registry_token }}
 
-    - name: Print image url
-      if: steps.check_exclude_file.outputs.files_exists == 'false'
-      shell: bash
-      run: echo "Image ${{ inputs.image_name }} has been pushed to ${{ steps.push-to-registry.outputs.registry-paths }}."
+#   - name: Print image url
+#     if: steps.check_exclude_file.outputs.files_exists == 'false'
+#     shell: bash
+#     run: echo "Image ${{ inputs.image_name }} has been pushed to ${{ steps.push-to-registry.outputs.registry-paths }}."
