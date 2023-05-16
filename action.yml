@@ -25,7 +25,7 @@ inputs:
     description: 'Tag of the built image'
     required: false
     default: ''
-  arch:
+  archs:
     description: 'architecture to build on'
     required: true
   dockerfile:
@@ -97,7 +97,7 @@ runs:
       with:
         dockerfiles: ${{ inputs.dockerfile }}
         image: ${{ inputs.image_name}}
-        archs: ${{ input.arch }}
+        archs: ${{ input.archs }}
         context: ${{ inputs.docker_context }}
         tags: latest ${{ inputs.tag }} ${{ steps.vars.outputs.cur_date }} ${{ github.sha }}
 
