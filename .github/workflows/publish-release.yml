@@ -5,7 +5,7 @@ name: Release
 on:
   push:
     tags:
-      - v5.1
+      - v*.*.*
 
 jobs:
   release:
