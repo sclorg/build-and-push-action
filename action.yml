@@ -84,9 +84,10 @@ runs:
         allow_failure: true # fails the Action if Dockerfile is missing
         
     - name: Install qemu dependency for multi-arch
+      shell: bash
       run: |
-        sudo yum update
-        sudo yum install -y qemu-user-static
+        sudo apt-get update
+        sudo apt-get install -y qemu-user-static
 
     - name: Build image
       if: steps.check_exclude_file.outputs.files_exists == 'false'
