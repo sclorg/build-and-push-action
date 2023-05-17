@@ -40,12 +40,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Login to registry - to fail in the beggining of action if creds are incorrect
-      uses: redhat-actions/podman-login@v1
-      with:
-        registry: ${{ inputs.registry }}
-        username: ${{ inputs.registry_username }}
-        password: ${{ inputs.registry_token }}
+#    - name: Login to registry - to fail in the beggining of action if creds are incorrect
+#      uses: redhat-actions/podman-login@v1
+#      with:
+#        registry: ${{ inputs.registry }}
+#        username: ${{ inputs.registry_username }}
+#        password: ${{ inputs.registry_token }}
 
     - name: Checkout git
       uses: actions/checkout@v2
