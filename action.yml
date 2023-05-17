@@ -97,7 +97,7 @@ runs:
       with:
         dockerfiles: ${{ inputs.dockerfile }}
         image: ${{ inputs.image_name}}
-        archs: ${{ input.archs }}
+        archs: ${{ inputs.archs }}
         context: ${{ inputs.docker_context }}
         tags: latest ${{ inputs.tag }} ${{ steps.vars.outputs.cur_date }} ${{ github.sha }}
 
