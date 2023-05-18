@@ -27,7 +27,8 @@ inputs:
     default: ''
   archs:
     description: 'architecture to build on'
-    required: true
+    required: false
+    default: "amd64"
   dockerfile:
     description: 'Dockerfile to build the image with a relative path'
     required: false
