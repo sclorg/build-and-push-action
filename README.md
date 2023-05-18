@@ -54,7 +54,6 @@ jobs:
           dockerfile: "1.20/Dockerfile"
           image_name: "container_image-1.20"
           tag: "tag"
-          archs: "amd64"
 ```
 
 ## Multi arch builds
