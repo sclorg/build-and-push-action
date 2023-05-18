@@ -26,7 +26,7 @@ inputs:
     required: false
     default: ''
   archs:
-    description: 'architecture to build on'
+    description: 'Label the image with this architecture. For multiple architectures, seperate them by a comma'
     required: false
     default: "amd64"
   dockerfile:
@@ -86,6 +86,7 @@ runs:
         
 
     - name: Set up QEMU
+      if: inputs.archs != 'amd64'
       uses: docker/setup-qemu-action@v2
 
     - name: Build image
