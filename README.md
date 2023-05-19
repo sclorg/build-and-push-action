@@ -57,7 +57,7 @@ jobs:
 ```
 
 ## Multi arch builds
-Input archs is provided to build the multi architecture images.  archs input shoould be comma separated ( i.e. archs: "amd64, s390x" ). Its an optional arguments , if not provided image will be build on amd64 i.e. default arch
+Input `archs` is provided to build the multi architecture images. `archs` input should be comma separated ( i.e. `archs: "amd64, s390x"` ). It is an optional argument, if not provided image will be built on amd64 i.e. default arch
 
 The example below shows how the `sclorg/build-and-push-action` can be used for multi-arch image 
 
