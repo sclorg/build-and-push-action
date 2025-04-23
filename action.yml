@@ -59,6 +59,7 @@ runs:
         registry: ${{ inputs.registry }}
         username: ${{ inputs.registry_username }}
         password: ${{ inputs.registry_token }}
+        logout: false
 
     - name: Checkout git
       uses: actions/checkout@v4
